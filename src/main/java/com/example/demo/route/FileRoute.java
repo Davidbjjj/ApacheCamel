@@ -3,6 +3,8 @@ package com.example.demo.route;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+
 @Component
 public class FileRoute extends RouteBuilder {
     private String pastaE="C:\\tmp\\entrada\\";
@@ -19,7 +21,16 @@ public class FileRoute extends RouteBuilder {
                 .log("Arquivo:${header.CamelFileName}")
                 //aqui o log vai mostar o endereço da pasta
                 .log("Pasta:${header.CamelFilePath}")
+                .bean("fileComponent")
                 //ele pegar os arquivos de input e manda para o output
                 .to("file://"+pastaE+"output");
+    }
+}
+    //um metodo log em java que faz a mesma coisa, a dirença é que não precisamos ficar usando variavel sempre e sim apenas monitorando um caminho
+    //nesses componente só pode te apenas ter um método
+    @Component
+    class FileComponent{
+    public void log(File file){
+        System.out.printf("FileComponent:"+file.getName()+"Esse é o bean");
     }
 }
