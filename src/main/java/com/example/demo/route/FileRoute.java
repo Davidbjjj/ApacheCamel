@@ -13,6 +13,8 @@ public class FileRoute extends RouteBuilder {
     public void configure() throws Exception {
         //na pasta, vai criar uma parta 'input' onde todos os arquivos daqui, vao parao to
         //posso modificar pra onde ele vai mandar o arquivo e como eu quero o nome desse arquivo já movido "file://"+"input?move=${}/${file:name} na input vai ficar tipo um backup do arquivo que estava, vai ser movido para essa pasta de backup, passando o nome do arquivo"
+        //noop=true faz com que ele não processe o mesmo arquivo 2 vezes, ""        from("file://"+pastaE+"input?noop=true")
+        //recursive=true vai fazer com que as subpastas de input também sejam mapeada igual a ela.
         from("file://"+pastaE+"input?move=${file:name} copia/copia ${file:name}")
                 //log()usamos para saber informações
                 //log("${file:name}") para pegar o nome do arquivo.... file.getName está para compositor
