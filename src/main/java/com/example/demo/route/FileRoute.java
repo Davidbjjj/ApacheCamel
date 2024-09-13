@@ -12,7 +12,8 @@ public class FileRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         //na pasta, vai criar uma parta 'input' onde todos os arquivos daqui, vao parao to
-        from("file://"+pastaE+"input?delete=true")
+        //posso modificar pra onde ele vai mandar o arquivo e como eu quero o nome desse arquivo já movido "file://"+"input?move=${}/${file:name} na input vai ficar tipo um backup do arquivo que estava, vai ser movido para essa pasta de backup, passando o nome do arquivo"
+        from("file://"+pastaE+"input?move=${file:name} copia/copia ${file:name}")
                 //log()usamos para saber informações
                 //log("${file:name}") para pegar o nome do arquivo.... file.getName está para compositor
                 .log("${file:name}")
